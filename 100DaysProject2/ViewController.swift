@@ -49,9 +49,15 @@ class ViewController: UIViewController {
         var title: String
         if sender.tag == correctAnswer{
             title = "Correct"
-            score += 1
+                score += 1
+            if score == 10{
+                title = "You Won"
+                let ac = UIAlertController(title: title, message: "You know your flags!!", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
+                present(ac, animated: true)
+            }
         }else{
-            title = "Wrong"
+            title = "Wrong you clicked: \(countries[sender.tag].uppercased())"
             score -= 1
         }
        
@@ -71,8 +77,8 @@ class ViewController: UIViewController {
         button1.setImage(UIImage(named: countries[0]),for: .normal)
         button2.setImage(UIImage(named: countries[1]),for: .normal)
         button3.setImage(UIImage(named: countries[2]),for: .normal)
-        
-        title = countries[correctAnswer].uppercased()
+        var titeStr = " Score: \(score)"
+        title = countries[correctAnswer].uppercased() + titeStr
     }
     
     
